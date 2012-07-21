@@ -21,17 +21,21 @@ namespace GameOfLifeTests.Functional
             outputter = new InMemoryOutputFormatter();
         }
 
+        private void PlayGameWithInput(bool[,] pattern)
+        {
+            IInputFormatter inputter = new InMemoryInputFormatter(pattern);
+            controller.Play(inputter);
+        }
+
         [Test]
-        public void patternTest()
+        public void BlockPatternTest()
         {
             bool[,] pattern = new bool[,]
             {
                 {true, true},
                 {true, true}
             };
-
-            IInputFormatter inputter = new InMemoryInputFormatter(pattern);
-            controller.Play(inputter);
+            PlayGameWithInput(pattern);
 
             // The block pattern is expected to remain the same.
             bool[,] expectedPattern = pattern;
@@ -47,13 +51,33 @@ namespace GameOfLifeTests.Functional
                 {true, false, true},
                 {false, true, false}
             };
-
-            IInputFormatter inputter = new InMemoryInputFormatter(pattern);
-            controller.Play(inputter);
+            PlayGameWithInput(pattern);
 
             // The block pattern is expected to remain the same.
             bool[,] expectedPattern = pattern;
             Assert.That(controller.ShowBoard(outputter), Is.EqualTo(expectedPattern));
         }
+
+        [Test]
+        [Ignore("Ignoring while diving deeper into unit tests to make this test work.")]
+        public void BlinkerPatternTest()
+        {
+            bool[,] pattern = new bool[,]
+            {
+                {false, true, false},
+                {false, true, false},
+                {false, true, false}
+            };
+            PlayGameWithInput(pattern);
+
+            bool[,] expectedPattern = new bool[,]
+            {
+                {false, false, false},
+                {true, true, true},
+                {false, false, false}
+            };
+            Assert.That(controller.ShowBoard(outputter), Is.EqualTo(expectedPattern));
+        }
+
     }
 }

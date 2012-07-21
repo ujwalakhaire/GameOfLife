@@ -34,7 +34,7 @@ namespace GameOfLife
             for (int rowIndex = 0; rowIndex <= rowCount; rowIndex++)
             {
                 for (int columnIndex = 0; columnIndex <= columnCount; columnIndex++)
-                    cells.Add(new Cell());
+                    cells.Add(new Cell(seedData[rowIndex, columnIndex], rowIndex, columnIndex));
             }
         }
 
