@@ -44,6 +44,12 @@
     <Compile Include="Functional\GameOfLifeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameOfLife\GameOfLife.csproj">
+      <Project>{DDB9E3A1-C07A-41C6-845D-B9E0F6CB2BEA}</Project>
+      <Name>GameOfLife</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using GameOfLife;
 
 namespace GameOfLifeTests.Functional
 {
@@ -10,9 +11,9 @@ namespace GameOfLifeTests.Functional
     class GameOfLifeTest
     {
         [Test]
-        public void UltimateTruthTest()
+        public void BlockPatternTest()
         {
-            Assert.That(2 + 2, Is.EqualTo(4));
+            GameController.Play();
         }
     }
 }
