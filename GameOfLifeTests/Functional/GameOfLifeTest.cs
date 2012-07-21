@@ -21,6 +21,13 @@ namespace GameOfLifeTests.Functional
             };
             IInputFormatter inputter = new InMemoryInputFormatter(blockPattern);
             GameController.Play(inputter);
+
+            // The block pattern is expected to remain the same.
+            bool[,] expectedPattern = blockPattern;
+
+            IOutputFormatter outputter = new InMemoryOutputFormatter();
+
+            Assert.That(GameController.ShowBoard(outputter), Is.EqualTo(expectedPattern));
         }
     }
 }

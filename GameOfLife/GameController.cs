@@ -11,5 +11,15 @@ namespace GameOfLife
         public static void Play(IInputFormatter inputter)
         {
         }
+
+        public static object ShowBoard(IOutputFormatter outputter)
+        {
+            bool[,] data = new bool[,]
+            {
+                {true, true},
+                {true, true}
+            };
+            return outputter.Output(data);
+        }
     }
 }
