@@ -51,30 +51,21 @@ namespace GameOfLifeTests.Unit
         public void FirstCellDataAccuracyOfSquareBoardTest()
         {
             CreateSquareBoard();
-            Cell firstCell = board.Cells[0];
-            Assert.That(firstCell.CurrentState, Is.False);
-            Assert.That(firstCell.X, Is.EqualTo(0));
-            Assert.That(firstCell.Y, Is.EqualTo(0));
+            Assert.That(board.Cells[0], Is.EqualTo(new Cell(false, 0, 0)));
         }
 
         [Test]
         public void LastCellDataAccuracyOfSquareBoardTest()
         {
             CreateSquareBoard();
-            Cell lastCell = board.Cells[board.Cells.Count-1];
-            Assert.That(lastCell.CurrentState, Is.True);
-            Assert.That(lastCell.X, Is.EqualTo(2));
-            Assert.That(lastCell.Y, Is.EqualTo(2));
+            Assert.That(board.Cells[board.Cells.Count - 1], Is.EqualTo(new Cell(true, 2, 2)));
         }
 
         [Test]
         public void RandomCellDataAccuracyOfNonSquareBoardTest()
         {
             CreateNonSquareBoard();
-            Cell cell = board.Cells[3];
-            Assert.That(cell.CurrentState, Is.False);
-            Assert.That(cell.X, Is.EqualTo(1));
-            Assert.That(cell.Y, Is.EqualTo(0));
+            Assert.That(board.Cells[3], Is.EqualTo(new Cell(false, 1, 0)));
         }
     }
 }

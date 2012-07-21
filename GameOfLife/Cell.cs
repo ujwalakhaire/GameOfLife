@@ -35,5 +35,22 @@ namespace GameOfLife
                 return y;
             }
         }
+
+        public override string ToString()
+        {
+            return String.Format("{0} <current State: {1}, X: {2}, Y: {3}>", base.ToString(), CurrentState, X, Y); 
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            Cell cell = obj as Cell;
+            if (obj == null)
+                return false;
+
+            return ((cell.CurrentState == this.CurrentState) && (cell.X == this.X) && (cell.Y == this.Y));
+        }
     }
 }
