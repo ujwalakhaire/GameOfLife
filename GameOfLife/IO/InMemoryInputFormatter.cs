@@ -7,5 +7,9 @@ namespace GameOfLife.IO
 {
     public class InMemoryInputFormatter : IInputFormatter
     {
+        public InMemoryInputFormatter(bool[,] data)
+        {
+
+        }
     }
 }

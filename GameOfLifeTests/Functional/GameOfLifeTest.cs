@@ -14,9 +14,13 @@ namespace GameOfLifeTests.Functional
         [Test]
         public void BlockPatternTest()
         {
-            IInputFormatter inputter = new InMemoryInputFormatter();
-
-            GameController.Play();
+            bool[,] blockPattern = new bool[,]
+            {
+                {true, true},
+                {true, true}
+            };
+            IInputFormatter inputter = new InMemoryInputFormatter(blockPattern);
+            GameController.Play(inputter);
         }
     }
 }
