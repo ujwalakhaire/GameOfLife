@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="IO\IInputFormatter.cs" />
     <Compile Include="IO\InMemoryInputFormatter.cs" />

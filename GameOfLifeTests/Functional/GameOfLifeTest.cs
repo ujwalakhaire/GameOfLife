@@ -11,23 +11,49 @@ namespace GameOfLifeTests.Functional
     [TestFixture]
     class GameOfLifeTest
     {
-        [Test]
-        public void BlockPatternTest()
+        GameController controller;
+        IOutputFormatter outputter;
+
+        [TestFixtureSetUp]
+        public void Setup()
         {
-            bool[,] blockPattern = new bool[,]
+            controller = new GameController();
+            outputter = new InMemoryOutputFormatter();
+        }
+
+        [Test]
+        public void patternTest()
+        {
+            bool[,] pattern = new bool[,]
             {
                 {true, true},
                 {true, true}
             };
-            IInputFormatter inputter = new InMemoryInputFormatter(blockPattern);
-            GameController.Play(inputter);
+
+            IInputFormatter inputter = new InMemoryInputFormatter(pattern);
+            controller.Play(inputter);
 
             // The block pattern is expected to remain the same.
-            bool[,] expectedPattern = blockPattern;
+            bool[,] expectedPattern = pattern;
+            Assert.That(controller.ShowBoard(outputter), Is.EqualTo(expectedPattern));
+        }
 
-            IOutputFormatter outputter = new InMemoryOutputFormatter();
+        [Test]
+        public void BoatPatternTest()
+        {
+            bool[,] pattern = new bool[,]
+            {
+                {true, true, false},
+                {true, false, true},
+                {false, true, false}
+            };
 
-            Assert.That(GameController.ShowBoard(outputter), Is.EqualTo(expectedPattern));
+            IInputFormatter inputter = new InMemoryInputFormatter(pattern);
+            controller.Play(inputter);
+
+            // The block pattern is expected to remain the same.
+            bool[,] expectedPattern = pattern;
+            Assert.That(controller.ShowBoard(outputter), Is.EqualTo(expectedPattern));
         }
     }
 }

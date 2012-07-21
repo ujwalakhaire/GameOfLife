@@ -8,18 +8,16 @@ namespace GameOfLife
 {
     public class GameController
     {
-        public static void Play(IInputFormatter inputter)
+        private Board board;
+
+        public void Play(IInputFormatter inputter)
         {
+            board = new Board(inputter.Format());
         }
 
-        public static object ShowBoard(IOutputFormatter outputter)
+        public object ShowBoard(IOutputFormatter outputter)
         {
-            bool[,] data = new bool[,]
-            {
-                {true, true},
-                {true, true}
-            };
-            return outputter.Output(data);
+            return outputter.Output(board.Show());
         }
     }
 }
