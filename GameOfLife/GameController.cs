@@ -25,12 +25,10 @@ namespace GameOfLife
         {
             // 1. Iterate through cells.
             // 2. For each cell, determine number of live and dead neighbors.
-            // 3. Apply rules which is dependent on current state of the cell and it's number of live and dead neighbors.
-
+            // 3. Decide next stage.
             foreach (Cell cell in board.Cells)
-            {
-               // RuleManager.ApplyRules(cell, board.NeighborsOf(cell));
-            }
+                cell.NextState = RuleManager.DecideStateInNextGeneration(cell, board.NeighborsOf(cell));     
+            board.ChangeToNextGeneration();
         }
     }
 }

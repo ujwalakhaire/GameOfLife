@@ -59,7 +59,6 @@ namespace GameOfLifeTests.Functional
         }
 
         [Test]
-        [Ignore("Ignoring while diving deeper into unit tests to make this test work.")]
         public void BlinkerPatternTest()
         {
             bool[,] pattern = new bool[,]

@@ -71,5 +71,14 @@ namespace GameOfLife
 
             return neighbors;
         }
+
+        internal void ChangeToNextGeneration()
+        {
+            foreach (Cell cell in Cells)
+            {
+                cell.CurrentState = Convert.ToBoolean(cell.NextState);
+                cell.NextState = null;
+            }
+        }
     }
 }

@@ -22,7 +22,8 @@ namespace GameOfLife
         {
         }
 
-        public bool CurrentState { get; set; }
+        public Boolean CurrentState { get; set; }
+        public Boolean? NextState { get; set; }
 
         public int X
         {

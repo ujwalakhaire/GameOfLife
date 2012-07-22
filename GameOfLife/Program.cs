@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GameOfLife.IO;
 
 namespace GameOfLife
 {
@@ -9,20 +10,14 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            bool[,] nonSquarePattern = new bool[,]
+            GameController controller = new GameController();
+            bool[,] pattern = new bool[,]
             {
-                {false, true, false},
-                {false, true, false}
+                {true, true},
+                {true, false}
             };
-            Board board = new Board(nonSquarePattern);
-
-            IList<Cell> expectedNeighbors = new List<Cell>()
-                    { new Cell(true, 0, 1),
-                      new Cell(false, 1, 0), 
-                      new Cell(true, 1, 1) };
-
-            Cell firstCell = board.Cells[0];
-            IList<Cell> actualNeighbors = board.NeighborsOf(firstCell);
+            IInputFormatter inputter = new InMemoryInputFormatter(pattern);
+            controller.Play(inputter);
         }
     }
 }
