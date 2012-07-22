@@ -82,5 +82,53 @@ namespace GameOfLifeTests.Unit
 
             Assert.That(actualNeighbors, Is.EqualTo(expectedNeighbors));
         }
+
+        [Test]
+        public void LastCellNeighborsOfNonSquaredBoardTest()
+        {
+            CreateNonSquareBoard();
+            IList<Cell> expectedNeighbors = new List<Cell>()
+                    { new Cell(true, 0, 1),
+                      new Cell(false, 0, 2),
+                      new Cell(true, 1, 1) };
+
+            Cell lastCell = board.Cells[board.Cells.Count - 1];
+            IList<Cell> actualNeighbors = board.NeighborsOf(lastCell);
+
+            Assert.That(actualNeighbors, Is.EqualTo(expectedNeighbors));
+        }
+
+        [Test]
+        public void MiddleCellNeighborsOfNonSquaredBoardTest()
+        {
+            CreateNonSquareBoard();
+            IList<Cell> expectedNeighbors = new List<Cell>()
+                    { new Cell(false, 0, 0),
+                      new Cell(true, 0, 1),
+                      new Cell(false, 0, 2),
+                      new Cell(false, 1, 0),
+                      new Cell(false, 1, 2) };
+
+
+            Cell middleCell = board.Cells[4];
+            IList<Cell> actualNeighbors = board.NeighborsOf(middleCell);
+
+            Assert.That(actualNeighbors, Is.EqualTo(expectedNeighbors));
+        }
+
+        [Test]
+        public void LowerFrontEdgeCellNeighborsOfNonSquaredBoardTest()
+        {
+            CreateNonSquareBoard();
+            IList<Cell> expectedNeighbors = new List<Cell>()
+                    { new Cell(false, 0, 0),
+                      new Cell(true, 0, 1),
+                      new Cell(true, 1, 1) };
+
+            Cell lowerFrontEdgeCell = board.Cells[3];
+            IList<Cell> actualNeighbors = board.NeighborsOf(lowerFrontEdgeCell);
+
+            Assert.That(actualNeighbors, Is.EqualTo(expectedNeighbors));
+        }
     }
 }
