@@ -18,6 +18,10 @@ namespace GameOfLife
             y = columnIndex;
         }
 
+        public Cell(int rowIndex, int columnIndex) :this(false, rowIndex, columnIndex)
+        {
+        }
+
         public bool CurrentState { get; set; }
 
         public int X

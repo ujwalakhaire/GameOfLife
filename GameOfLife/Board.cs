@@ -8,13 +8,14 @@ namespace GameOfLife
     public class Board
     {
         private bool[,] cellData;
-        private IList<Cell> cells;
+        private IList<IList<Cell>> cells;
 
         public IList<Cell> Cells
         {
             get
             {
-                return cells;
+                //Flattening list of cells.
+                return cells.SelectMany(c => c).ToList();
             }
         }
 
@@ -26,21 +27,33 @@ namespace GameOfLife
 
         private void PopulateCells(bool[,] seedData)
         {
-            cells = new List<Cell>();
-
+            cells = new List<IList<Cell>>();
             int rowCount = seedData.GetUpperBound(0);
             int columnCount = seedData.GetUpperBound(1);
 
             for (int rowIndex = 0; rowIndex <= rowCount; rowIndex++)
             {
+                IList<Cell> rowOfCells = new List<Cell>();
                 for (int columnIndex = 0; columnIndex <= columnCount; columnIndex++)
-                    cells.Add(new Cell(seedData[rowIndex, columnIndex], rowIndex, columnIndex));
+                {
+                    Cell cell = new Cell(seedData[rowIndex, columnIndex], rowIndex, columnIndex);
+                    rowOfCells.Add(cell);
+                }
+                cells.Add(rowOfCells);
             }
         }
 
-        internal bool[,] Show()
+        internal IEnumerable<IEnumerable<bool>> Show()
         {
-            return cellData;
+            return cells.Select(rowOfCells => rowOfCells.Select(cell => cell.CurrentState));
+        }
+
+        public IList<Cell> NeighborsOf(Cell cell)
+        {
+            IList<Cell> neighbors = new List<Cell>();
+
+
+            return neighbors;
         }
     }
 }

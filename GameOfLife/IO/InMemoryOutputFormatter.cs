@@ -7,10 +7,22 @@ namespace GameOfLife.IO
 {
     public class InMemoryOutputFormatter : IOutputFormatter
     {
-        public object Output(bool[,] data)
+        public object Output(IEnumerable<IEnumerable<bool>> data)
         {
-            //Since this is in memory data, no formatting is required.
-            return data;
+            //TODO : validate every row has same number of columns.
+            int rowCount = data.Count();
+            int columnCount = data.First().Count();
+            bool[,] output = new bool[rowCount, columnCount];
+
+            for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
+            {
+                IEnumerable<bool> rowOfCellStates = data.ElementAt(rowIndex);
+                for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+                {
+                    output[rowIndex, columnIndex] = rowOfCellStates.ElementAt(columnIndex);
+                }
+            }
+            return output;
         }
     }
 }

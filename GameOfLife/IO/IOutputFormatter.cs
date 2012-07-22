@@ -7,6 +7,6 @@ namespace GameOfLife.IO
 {
     public interface IOutputFormatter
     {
-        object Output(bool[,] data);
+        object Output(IEnumerable<IEnumerable<bool>> data);
     }
 }

@@ -67,5 +67,19 @@ namespace GameOfLifeTests.Unit
             CreateNonSquareBoard();
             Assert.That(board.Cells[3], Is.EqualTo(new Cell(false, 1, 0)));
         }
+
+        [Test]
+        [Ignore]
+        public void FirstCellNeighborsOfNonSquaredBoardTest()
+        {
+            CreateNonSquareBoard();
+            IList<Cell> expectedNeighbors = new List<Cell>()
+                    { new Cell(true, 0, 1),
+                      new Cell(false, 1, 0), 
+                      new Cell(true, 1, 1) };
+            Cell firstCell = board.Cells[0];
+            IList<Cell> actualNeighbors = board.NeighborsOf(firstCell);
+            Assert.That(actualNeighbors, Is.EqualTo(expectedNeighbors));
+        }
     }
 }
