@@ -78,5 +78,25 @@ namespace GameOfLifeTests.Functional
             Assert.That(controller.ShowBoard(outputter), Is.EqualTo(expectedPattern));
         }
 
+        [Test]
+        [Ignore]
+        public void ToadPatternTest()
+        {
+            bool[,] pattern = new bool[,]
+            {
+                {false, true, true, true},
+                {true, true, true, false}
+            };
+            PlayGameWithInput(pattern);
+
+            bool[,] expectedPattern = new bool[,]
+            {
+                {false, false, true, false},
+                {true, false, false, true},
+                {true, false, false, true},
+                {false, true, false, false}
+            };
+            Assert.That(controller.ShowBoard(outputter), Is.EqualTo(expectedPattern));
+        }
     }
 }
