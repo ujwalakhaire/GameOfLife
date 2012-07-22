@@ -22,6 +22,10 @@ namespace GameOfLife
         {
         }
 
+        public Cell() : this(0,0)
+        {
+        }
+
         public Boolean CurrentState { get; set; }
         public Boolean? NextState { get; set; }
 

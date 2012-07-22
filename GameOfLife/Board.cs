@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace GameOfLife
 {
     public class Board
     {
-        private bool[,] cellData;
         private IList<IList<Cell>> cells;
 
         public IList<Cell> Cells
@@ -21,7 +21,6 @@ namespace GameOfLife
 
         public Board(bool[,] seedData)
         {
-            cellData = seedData;
             PopulateCells(seedData);
         }
 
@@ -79,6 +78,38 @@ namespace GameOfLife
                 cell.CurrentState = Convert.ToBoolean(cell.NextState);
                 cell.NextState = null;
             }
+        }
+
+        // TODO : Write desccription
+        internal void PrepareForNextGeneration()
+        {
+            AddDeadCellsAroundTheBoard();
+            RecalculatePositions();
+        }
+
+        private void RecalculatePositions()
+        {
+            
+        }
+
+        private void AddDeadCellsAroundTheBoard()
+        {
+            int columnCount = cells.First().Count;
+            IList<Cell> deadCellsRowToAdd = new List<Cell>();
+            for (int index = 0; index < columnCount; index++)
+                deadCellsRowToAdd.Add(new Cell());
+
+            cells.Add(deadCellsRowToAdd);
+            cells.Insert(0, new List<Cell>(deadCellsRowToAdd));
+
+            IList<IList<Cell>> newCells = new List<IList<Cell>>();
+            foreach (IList<Cell> rowOfCells in cells)
+            {
+                rowOfCells.Add(new Cell());
+                rowOfCells.Insert(0, new Cell());
+                newCells.Add(rowOfCells);
+            }
+            cells = newCells;
         }
     }
 }
