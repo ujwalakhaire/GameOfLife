@@ -52,6 +52,22 @@ namespace GameOfLife
         {
             IList<Cell> neighbors = new List<Cell>();
 
+            for (int rowIndex = cell.X - 1; rowIndex <= cell.X + 1; rowIndex++)
+            {
+                IList<Cell> rowOfCells = cells.ElementAtOrDefault(rowIndex);
+                if (rowOfCells != null)
+                {
+                    for (int columnIndex = cell.Y - 1; columnIndex <= cell.Y + 1; columnIndex++)
+                    {
+                        if (rowIndex == cell.X && columnIndex == cell.Y)
+                            continue;
+
+                        Cell neighboringCell = rowOfCells.ElementAtOrDefault(columnIndex);
+                        if (neighboringCell != null)
+                            neighbors.Add(neighboringCell);
+                    }
+                }
+            }
 
             return neighbors;
         }
