@@ -79,7 +79,6 @@ namespace GameOfLifeTests.Functional
         }
 
         [Test]
-        [Ignore]
         public void ToadPatternTest()
         {
             bool[,] pattern = new bool[,]

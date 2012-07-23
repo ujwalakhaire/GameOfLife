@@ -7,15 +7,12 @@ namespace GameOfLife
 {
     public class Cell
     {
-        private int x;
-        private int y;
-
         public Cell(bool state, int rowIndex, int columnIndex)
         {
             // TODO: Complete member initialization
             CurrentState = state;
-            x = rowIndex;
-            y = columnIndex;
+            X = rowIndex;
+            Y = columnIndex;
         }
 
         public Cell(int rowIndex, int columnIndex) :this(false, rowIndex, columnIndex)
@@ -29,21 +26,8 @@ namespace GameOfLife
         public Boolean CurrentState { get; set; }
         public Boolean? NextState { get; set; }
 
-        public int X
-        {
-            get
-            {
-                return x;
-            }
-        }
-
-        public int Y
-        {
-            get
-            {
-                return y;
-            }
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public override string ToString()
         {

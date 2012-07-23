@@ -14,7 +14,7 @@ namespace GameOfLife
             bool[,] pattern = new bool[,]
             {
                 {true, true},
-                {true, false}
+                {true, true}
             };
             IInputFormatter inputter = new InMemoryInputFormatter(pattern);
             controller.Play(inputter);

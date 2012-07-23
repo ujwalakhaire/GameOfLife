@@ -89,18 +89,26 @@ namespace GameOfLife
 
         private void RecalculatePositions()
         {
-            
+            int rowIndex = 0;
+            int columnIndex = 0;
+            foreach (IList<Cell> cellList in cells)
+            {
+                foreach (Cell cell in cellList)
+                {
+                    cell.X = rowIndex;
+                    cell.Y = columnIndex;
+
+                    columnIndex++;
+                }
+                rowIndex++;
+                columnIndex = 0;
+            }
         }
 
         private void AddDeadCellsAroundTheBoard()
         {
-            int columnCount = cells.First().Count;
-            IList<Cell> deadCellsRowToAdd = new List<Cell>();
-            for (int index = 0; index < columnCount; index++)
-                deadCellsRowToAdd.Add(new Cell());
-
-            cells.Add(deadCellsRowToAdd);
-            cells.Insert(0, new List<Cell>(deadCellsRowToAdd));
+            cells.Add(DeadCellsToAdd());
+            cells.Insert(0, DeadCellsToAdd());
 
             IList<IList<Cell>> newCells = new List<IList<Cell>>();
             foreach (IList<Cell> rowOfCells in cells)
@@ -110,6 +118,47 @@ namespace GameOfLife
                 newCells.Add(rowOfCells);
             }
             cells = newCells;
+        }
+
+        private IList<Cell> DeadCellsToAdd()
+        {
+            int columnCount = cells.First().Count;
+            IList<Cell> deadCellsRowToAdd = new List<Cell>();
+            for (int index = 0; index < columnCount; index++)
+                deadCellsRowToAdd.Add(new Cell());
+
+            return deadCellsRowToAdd;
+        }
+
+        internal void CleanBoundary()
+        {
+            // does last row list contain any live cell?
+            bool gotLife = cells.Last().Any(cell => cell.CurrentState == true);
+            if (!gotLife)
+                cells.RemoveAt(cells.Count - 1);
+
+            // does first list contain any live cell? 
+            gotLife = cells.First().Any(cell => cell.CurrentState == true);
+            if (!gotLife)
+                cells.RemoveAt(0);
+
+            // does last column list contain any live cell?
+            gotLife = cells.Select(rowofCells => rowofCells.Last()).Any(cell => cell.CurrentState == true);
+            if (!gotLife)
+            {
+                // remove last cell.
+                foreach (List<Cell> list in cells)
+                    list.RemoveAt(list.Count - 1);
+            }
+
+            // does first column list contain any live cell?
+            gotLife = cells.Select(rowofCells => rowofCells.First()).Any(cell => cell.CurrentState == true);
+            if (!gotLife)
+            {
+                // remove first cell
+                foreach (List<Cell> list in cells)
+                    list.RemoveAt(0);
+            }
         }
     }
 }
