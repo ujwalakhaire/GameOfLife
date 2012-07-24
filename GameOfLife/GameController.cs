@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using GameOfLife.IO;
 
 namespace GameOfLife
@@ -14,6 +15,20 @@ namespace GameOfLife
         {
             board = new Board(inputter.Format());
             Tick();
+        }
+
+        public void PlayMultipleGenerations(IInputFormatter inputter, IOutputFormatter outputter)
+        {
+            board = new Board(inputter.Format());
+            int generationCount = 0;
+            while (true)
+            {
+                Console.WriteLine("Generation : {0}", generationCount++);
+                outputter.Output(board.Show());
+                Tick();
+                Console.WriteLine("\nEnter any key to see next generation : ");
+                Console.ReadKey();
+            }
         }
 
         public object ShowBoard(IOutputFormatter outputter)

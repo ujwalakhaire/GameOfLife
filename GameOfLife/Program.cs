@@ -10,109 +10,19 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            DisplayTickOfSampleInMemoryInputs();
-            //DisplayTickOfFileinput();
-            Console.WriteLine("Enter any key to exit");
-            Console.ReadKey();
-        }
-
-        private static void DisplayTickOfSampleInMemoryInputs()
-        {
-            DisplayTickOfInMemoryBlockPattern();
-            DisplayTickOfInMemoryBoatPattern();
-            DisplayTickOfInMemoryBlinkerPattern();
-            DisplayTickOfInMemoryToadPattern();
-        }
-
-        private static void DisplayTickOfInMemoryBlockPattern()
-        {
-            bool[,] blockPattern = new bool[,]
+            if (args.Length == 0)
             {
-                {true, true},
-                {true, true}
-            };
+                Console.WriteLine("Please enter a valid file path.");
+                return;
+            }
 
-            IInputFormatter inputter = new InMemoryInputFormatter(blockPattern);
-            Console.WriteLine("Input<Block Pattern>:");
+            IInputFormatter inputter = new FileInputter(args[0]);
+            Console.WriteLine("\nPattern present in file : ");
             inputter.Display();
 
             IOutputFormatter outputter = new ConsoleOutputFormatter();
             GameController controller = new GameController();
-            controller.Play(inputter);
-
-            Console.WriteLine("First Tick of Block Pattern:");
-            controller.ShowBoard(outputter);
-
-            Console.WriteLine("**************************************************");
-        }
-
-        private static void DisplayTickOfInMemoryBoatPattern()
-        {
-            bool[,] boatPattern = new bool[,]
-            {
-                {true, true, false},
-                {true, false, true},
-                {false, true, false}
-            };
-
-            IInputFormatter inputter = new InMemoryInputFormatter(boatPattern);
-            Console.WriteLine("Input<Boat Pattern>:");
-            inputter.Display();
-
-            IOutputFormatter outputter = new ConsoleOutputFormatter();
-            GameController controller = new GameController();
-            controller.Play(inputter);
-
-            Console.WriteLine("First Tick of Boat Pattern:");
-            controller.ShowBoard(outputter);
-
-            Console.WriteLine("**************************************************");
-        }
-
-        private static void DisplayTickOfInMemoryBlinkerPattern()
-        {
-            bool[,] blinkerPattern = new bool[,]
-            {
-                {false, true, false},
-                {false, true, false},
-                {false, true, false}
-            };
-
-            IInputFormatter inputter = new InMemoryInputFormatter(blinkerPattern);
-            Console.WriteLine("Input<Blinker Pattern>:");
-            inputter.Display();
-
-            IOutputFormatter outputter = new ConsoleOutputFormatter();
-            GameController controller = new GameController();
-            controller.Play(inputter);
-
-            Console.WriteLine("First Tick of Blinker Pattern:");
-            controller.ShowBoard(outputter);
-
-            Console.WriteLine("**************************************************");
-        }
-
-        private static void DisplayTickOfInMemoryToadPattern()
-        {
-            bool[,] toadPattern = new bool[,]
-            {
-                {false, true, false},
-                {false, true, false},
-                {false, true, false}
-            };
-
-            IInputFormatter inputter = new InMemoryInputFormatter(toadPattern);
-            Console.WriteLine("Input<Toad Pattern>:");
-            inputter.Display();
-
-            IOutputFormatter outputter = new ConsoleOutputFormatter();
-            GameController controller = new GameController();
-            controller.Play(inputter);
-
-            Console.WriteLine("First Tick of Toad Pattern:");
-            controller.ShowBoard(outputter);
-
-            Console.WriteLine("**************************************************");
+            controller.PlayMultipleGenerations(inputter, outputter);
         }
 
         private static void DisplayTickOfFileinput()
