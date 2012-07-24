@@ -9,7 +9,6 @@ namespace GameOfLife.IO
     {
         public object Output(IEnumerable<IEnumerable<bool>> data)
         {
-            //TODO : validate every row has same number of columns.
             int rowCount = data.Count();
             int columnCount = data.First().Count();
             bool[,] output = new bool[rowCount, columnCount];

@@ -80,7 +80,7 @@ namespace GameOfLife
             }
         }
 
-        // TODO : Write desccription
+        // If outer cells are alive, border the board with dead cells so see if neighborhood is expanding.
         internal void PrepareForNextGeneration()
         {
             AddDeadCellsAroundTheBoard();

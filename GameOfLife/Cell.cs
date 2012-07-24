@@ -9,7 +9,6 @@ namespace GameOfLife
     {
         public Cell(bool state, int rowIndex, int columnIndex)
         {
-            // TODO: Complete member initialization
             CurrentState = state;
             X = rowIndex;
             Y = columnIndex;
