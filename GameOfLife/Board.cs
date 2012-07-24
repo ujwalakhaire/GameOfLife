@@ -137,7 +137,7 @@ namespace GameOfLife
             if (!gotLife)
                 cells.RemoveAt(cells.Count - 1);
 
-            // does first list contain any live cell? 
+            // does first list contain any live cell?
             gotLife = cells.First().Any(cell => cell.CurrentState == true);
             if (!gotLife)
                 cells.RemoveAt(0);

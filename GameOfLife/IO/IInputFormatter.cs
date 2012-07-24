@@ -8,5 +8,6 @@ namespace GameOfLife.IO
     public interface IInputFormatter
     {
         bool[,] Format();
+        void Display();
     }
 }

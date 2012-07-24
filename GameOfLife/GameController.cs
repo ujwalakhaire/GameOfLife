@@ -33,5 +33,12 @@ namespace GameOfLife
 
             board.CleanBoundary();
         }
+
+        internal void Play(IInputFormatter inputter, int generationCount)
+        {
+            board = new Board(inputter.Format());
+            for (int index = 0; index < generationCount; index++)
+                Tick();
+        }
     }
 }

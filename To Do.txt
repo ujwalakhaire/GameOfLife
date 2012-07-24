@@ -1,0 +1,5 @@
+console outputter
+
+Inputter to read from file
+
+Main program - argument : filename and number of ticks
